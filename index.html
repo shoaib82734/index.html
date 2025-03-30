@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Eid Mubarak - Shoaib CSC Center</title> 
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            margin-top: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            font-size: 2em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        input {
+            width: 85%;
+            padding: 10px;
+            font-size: 1.2em;
+            margin-top: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            background: #ffcc00;
+            cursor: pointer;
+        }
+        .message {
+            font-size: 2em;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .show {
+            opacity: 1;
+        }
+        .falling-objects {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+        }
+        .moon-star {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('https://cdn-icons-png.flaticon.com/512/616/616489.png') no-repeat center/cover;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+        .news-ticker {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #ffcc00;
+            color: black;
+            padding: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            z-index: 1000;
+        }
+        .news-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-left 20s linear infinite;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="container"> 
+   <h1>✨ Shoaib CSC Center की ओर से Eid Mubarak ✨</h1> 
+   <p>अपना नाम डालें और ईद की मुबारकबाद पाएं:</p> 
+   <input type="text" id="nameInput" placeholder="अपना नाम लिखें" onkeypress="handleKeyPress(event)"> <button onclick="showMessage()">Enter</button> 
+   <div class="message" id="greeting"></div> <button onclick="shareMessage()">शेयर करें</button> 
+  </div> 
+  <div class="falling-objects" id="fallingObjects"></div> 
+  <div class="news-ticker"> 
+   <div class="news-content">
+    📢 Shoaib CSC Center - आपकी सेवा में हमेशा | संपर्क करें: +91 8273441638 | सभी डिजिटल सेवाएं उपलब्ध! 📢
+   </div> 
+  </div> 
+  <script>
+        function showMessage() {
+            let name = document.getElementById('nameInput').value;
+            let greeting = document.getElementById('greeting');
+            if (name.trim() !== "") {
+                greeting.innerHTML = `🌙 Shoaib CSC Center की ओर से, ${name} आपको ईद मुबारक! 🎉`;
+                greeting.classList.add("show");
+                createFallingObjects();
+            }
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                showMessage();
+            }
+        }
+        function createFallingObjects() {
+            let container = document.getElementById('fallingObjects');
+            container.innerHTML = '';
+            for (let i = 0; i < 30; i++) {
+                let obj = document.createElement('div');
+                obj.classList.add('moon-star');
+                obj.style.left = Math.random() * 100 + 'vw';
+                obj.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(obj);
+            }
+        }
+        function shareMessage() {
+            let name = document.getElementById('nameInput').value;
+            let message = name.trim() !== "" ? `🌙 Shoaib CSC Center की ओर से, ${name} आपको ईद मुबारक! 🎉` : "✨ Shoaib CSC Center की ओर से Eid Mubarak! ✨";
+            let shareText = encodeURIComponent(message);
+            let whatsappURL = `https://wa.me/?text=${shareText}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script> 
+ 
+</body></html>
